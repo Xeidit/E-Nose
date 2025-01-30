@@ -32,6 +32,22 @@ class Machine:
         print(response)
         self._position = [x,y,z]
 
+    def absMove (self,x,y,z):
+        if x + self._position[0] > self.xSize or y + self._position[1] > self.ySize or z + self._position[2] > self.zSize or x + self._position[0] < 0 or y+ self._position[1] < 0 or z + self._position[2] < 0 :
+            print("Movement would exced machine limits, Tried To move to:", x, y, z, "x,y,z")
+            return False
+        if not self._homed:
+            print("Machine needs to be homed first (g28 Command) before it can move")
+            return False
+        xDist = str(x)
+        yDist = str(y)
+        zDist = str(z)
+        command = "G0" + "x" + xDist + "y" + yDist + "z" + zDist
+        printer.write(command.encode())
+        response = printer.readline().decode()
+        print(response)
+        self._position = [self._position[0] + x, self._position[1] + y, self._position[2a]+ z]
+
 class Bottle:
     def __init__(self):
         self._size = [0,0] # X Y

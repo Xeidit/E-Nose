@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d097268-7261-4880-abfe-aa1d2161ea44" name="Changes" comment="Added Classes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="0d097268-7261-4880-abfe-aa1d2161ea44" name="Changes" comment="Added Move to point method">
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +99,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737761553463</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added Move to point method">
+      <option name="closed" value="true" />
+      <created>1738243878990</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1738243878990</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -117,6 +124,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="inital commit" />
     <MESSAGE value="Added Classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Classes" />
+    <MESSAGE value="Added Move to point method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Move to point method" />
   </component>
 </project>
