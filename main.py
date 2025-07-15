@@ -1,65 +1,47 @@
-import serial
+'''
+Jobs to do:
+Connect to printer
+get printer status
+home z axis
+home y axis
+home x axis
+'''
 
-class Machine:
-    def __init__(self):
-        self.xSize = 250
-        self.ySize = 250
-        self.zSize = 250
-        self._position = [0,0,0] # X Y Z
-        self._homed = False # Has the printer been homed so it knows where it is
 
-    def homeMachine (self):
-        command = "G28"
-        printer.write(command.encode())
-        response = printer.readline().decode()
-        self._homed = True
-        print(response)
-        return True
+import requests
 
-    def moveToPoint (self,x,y,z):
-        if x > self.xSize or y > self.ySize or z > self.zSize or x < 0 or y < 0 or z < 0 :
-            print("Movement would exced machine limits, Tried To move to:", x, y, z, "x,y,z")
-            return False
-        if not self._homed:
-            print("Machine needs to be homed first (g28 Command) before it can move")
-            return False
-        xDist = str(x - self._position[0])
-        yDist = str(y - self._position[1])
-        zDist = str(z - self._position[2])
-        command = "G0" + "x" + xDist + "y" + yDist + "z" + zDist
-        printer.write(command.encode())
-        response = printer.readline().decode()
-        print(response)
-        self._position = [x,y,z]
+# Moonraker server Address
+moonrakerUrl = "http://localhost:7125"
 
-    def absMove (self,x,y,z):
-        if x + self._position[0] > self.xSize or y + self._position[1] > self.ySize or z + self._position[2] > self.zSize or x + self._position[0] < 0 or y+ self._position[1] < 0 or z + self._position[2] < 0 :
-            print("Movement would exced machine limits, Tried To move to:", x, y, z, "x,y,z")
-            return False
-        if not self._homed:
-            print("Machine needs to be homed first (g28 Command) before it can move")
-            return False
-        xDist = str(x)
-        yDist = str(y)
-        zDist = str(z)
-        command = "G0" + "x" + xDist + "y" + yDist + "z" + zDist
-        printer.write(command.encode())
-        response = printer.readline().decode()
-        print(response)
-        self._position = [self._position[0] + x, self._position[1] + y, self._position[2a]+ z]
+def init():
+    # Get server status
+    url = moonrakerUrl + "/printer/info" # Query server status
+    try:
+        response = requests.get(url)
+        response.raise_for_status() # Raise an error for bad status codes
+        data = response.json() # Parse JSON response
+        print("Printer Info:", data) # Display response
+    except requests.exceptions.RequestException as e:
+        print("Request failed:", e) # Display error message if failed
+        return e # Return error message
 
-class Bottle:
-    def __init__(self):
-        self._size = [0,0] # X Y
-        self._position = [0,0] # X Y
-        self.content = ""
 
-class Chemical:
-    def __init__(self):
-        self._name = "None"
-        self._description = "Something Interesting"
+    # Send G-code
+    # Replace with your Moonraker server's IP and port
+    url = moonrakerUrl + "/printer/gcode/script"
 
-# Create a machine if one does not exist
+    # G-code command to send (e.g., homing the printer)
+    gcode_command = "G28"
 
-# Connect to machine via serial
-printer = serial.Serial('COM3', 9600)
+    # Prepare the payload
+    payload = {
+        "script": gcode_command
+    }
+
+    try:
+        response = requests.post(url, json=payload) # Send Request
+        response.raise_for_status() # Raise an error for bad status codes
+        print("Response:", response.json()) # Display response
+    except requests.exceptions.RequestException as e:
+        print("Request failed:", e) # Display error message if failed
+        return e # Return error message
