@@ -7,7 +7,6 @@ home y axis
 home x axis
 '''
 
-
 import requests
 
 # Moonraker server Address
