@@ -10,6 +10,9 @@ home x axis
 import requests
 from standard_fuctions import g_code
 
+x_offset = 0 # Offset to first bottle (bottom left) in the x direction
+y_offset = 0 # Offset to first bottle (bottom left) in the y direction
+
 # Moonraker server Address
 moonrakerUrl = "http://localhost:7125"
 
@@ -29,6 +32,6 @@ def init():
     g_code(moonrakerUrl, "g28 z") #Homes Z axis
     g_code(moonrakerUrl, "g28 x y") #Homes x and y axis
     g_code(moonrakerUrl, "g21") #Set units to mm
-
-    g_code(moonrakerUrl,"g54") # Offset to first bottle
+    offset = "g92 x"+str(x_offset)+"y"+str(y_offset)
+    g_code(moonrakerUrl,offset) # Set offset to first bottle
     return "Printer Ready"
