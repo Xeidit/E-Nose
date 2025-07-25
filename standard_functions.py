@@ -8,8 +8,8 @@ def probe(url,bottle):
     z_pos = bottle[2]
 
     g_code(url, "g0 z"+ safe_z_height +"F400") #Moves clear of bottles
-    g_code(url, "g0 x"+ x_pos + "y"+ y_pos + "F1600") #Move over bottle to probe
-    g_code(url, "g0 z"+ safe_z_height +"F400") #Move over bottle to probe
+    g_code(url, "g0 x"+ str(x_pos) + "y"+ str(y_pos) + "F1600") #Move over bottle to probe
+    g_code(url, "g0 z"+ str(z_pos) +"F400") #Move over bottle to probe
 
     return "ok"
 
